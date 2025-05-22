@@ -32,11 +32,14 @@ const SidebarMenu = ({collapsed,setCollapsed,visible,setVisible}) => {
       collapsible
       collapsed={collapsed}
       onCollapse={setCollapsed}
-      collapsedWidth={0} // 👈 hide everything when collapsed
-      trigger={null}     // 👈 no footer toggle button
+      collapsedWidth={0} 
+      trigger={null}     
       breakpoint="lg"
-      className="hidden  p-4 lg:block min-h-[calc(100vh-5rem)] bg-white sticky transition-all duration-300"
+      className="hidden lg:block min-h-screen bg-white fixed top-[80px] left-0 z-20 transition-all duration-300"
+style={{ width: collapsed ? 80 : 260 }}
+
       width={260}
+      
     >
       
       
@@ -51,7 +54,7 @@ const SidebarMenu = ({collapsed,setCollapsed,visible,setVisible}) => {
     </Sider>
   );
 
-  // ✅ Mobile Drawer
+  
   const renderDrawer = (
     <Drawer
       title="Dot Admin"
