@@ -1,6 +1,14 @@
 import React, { useState } from "react";
 import {
-  LineChart, Line, BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid, ResponsiveContainer,
+  LineChart,
+  Line,
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  Tooltip,
+  CartesianGrid,
+  ResponsiveContainer,
 } from "recharts";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -8,6 +16,8 @@ import html2canvas from "html2canvas";
 import { saveAs } from "file-saver";
 import jsPDF from "jspdf";
 import { startOfWeek, format } from "date-fns";
+import { Button, Dropdown, Menu } from "antd";
+import { DownloadOutlined } from "@ant-design/icons";
 
 // Generate dummy data dynamically from May 1 to today
 const generateDummyData = () => {
@@ -50,6 +60,7 @@ const SalesChart = () => {
 
   const filteredData = viewType === "daily" ? filteredDailyData : getWeeklyData(filteredDailyData);
 
+  // Download Handlers
   const downloadImage = () => {
     const chartEl = document.getElementById("chart-container");
     html2canvas(chartEl).then((canvas) => {
@@ -63,7 +74,9 @@ const SalesChart = () => {
     const csv = [
       ["Date", "Sales"],
       ...filteredData.map((row) => [row.date, row.sales]),
-    ].map((e) => e.join(",")).join("\n");
+    ]
+      .map((e) => e.join(","))
+      .join("\n");
 
     const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
     saveAs(blob, "sales-data.csv");
@@ -81,12 +94,37 @@ const SalesChart = () => {
     });
   };
 
+  // Ant Design Dropdown Menu
+  const downloadMenu = (
+    <Menu
+      items={[
+        {
+          key: "png",
+          label: "Download PNG",
+          onClick: downloadImage,
+        },
+        {
+          key: "csv",
+          label: "Download CSV",
+          onClick: downloadCSV,
+        },
+        {
+          key: "pdf",
+          label: "Download PDF",
+          onClick: downloadPDF,
+        },
+      ]}
+    />
+  );
+
   return (
-    <div className="bg-white mx-4 my-12 p-4 rounded-xl shadow-md  ">
+    <div className="bg-white mx-4 my-12 p-4 rounded-xl shadow-md">
       <div className="flex flex-wrap items-center justify-between gap-4 mb-4">
         {/* Date Range Picker */}
         <div className="flex items-center gap-2 flex-wrap">
-          <label className="px-3 py-1 rounded text-sm font-medium uppercase bg-blue-600 text-white ml-2">Start</label>
+          <label className="px-3 py-1 rounded text-sm font-medium uppercase bg-blue-600 text-white ml-2">
+            Start
+          </label>
           <DatePicker
             selected={startDate}
             onChange={(date) => date && setStartDate(date)}
@@ -97,7 +135,9 @@ const SalesChart = () => {
             dateFormat="yyyy-MM-dd"
             className="border p-1 rounded"
           />
-          <label className="px-3 py-1 rounded text-sm font-medium uppercase bg-blue-600 text-white ml-2">End</label>
+          <label className="px-3 py-1 rounded text-sm font-medium uppercase bg-blue-600 text-white ml-2">
+            End
+          </label>
           <DatePicker
             selected={endDate}
             onChange={(date) => date && setEndDate(date)}
@@ -111,7 +151,7 @@ const SalesChart = () => {
           />
         </div>
 
-        {/* Chart Type */}
+        {/* Chart Type Buttons */}
         <div className="flex gap-2">
           {["line", "bar"].map((type) => (
             <button
@@ -126,7 +166,7 @@ const SalesChart = () => {
           ))}
         </div>
 
-        {/* View Type */}
+        {/* View Type Buttons */}
         <div className="flex gap-2">
           {["daily", "weekly"].map((type) => (
             <button
@@ -141,21 +181,13 @@ const SalesChart = () => {
           ))}
         </div>
 
-        {/* Download */}
-        <div className="flex gap-2">
-          <button onClick={downloadImage} className="px-3 py-1 bg-blue-500 text-white rounded text-sm">
-            PNG
-          </button>
-          <button onClick={downloadPDF} className="px-3 py-1 bg-red-500 text-white rounded text-sm">
-            PDF
-          </button>
-          <button onClick={downloadCSV} className="px-3 py-1 bg-green-500 text-white rounded text-sm">
-            CSV
-          </button>
-        </div>
+        {/* Download Dropdown */}
+        <Dropdown overlay={downloadMenu} placement="bottomRight" arrow>
+          <Button icon={<DownloadOutlined />}>Download</Button>
+        </Dropdown>
       </div>
 
-      {/* Chart */}
+      {/* Chart Container */}
       <div id="chart-container" className="h-72">
         <ResponsiveContainer width="100%" height="100%">
           {chartType === "line" ? (
