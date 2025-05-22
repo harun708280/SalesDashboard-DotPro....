@@ -42,15 +42,16 @@ const TopHeader = ({ collapsed, setCollapsed, visible, setVisible }) => {
 
   return (
     <div className="w-full bg-white h-20 py-2 flex items-center justify-between sticky top-0 z-40 px-4">
-      
       <div className="flex items-center gap-4">
-       
         <div className="flex items-center gap-2 w-[220px]">
-          <img src="/logo.png" alt="Logo" className="h-12 w-12 object-contain" />
+          <img
+            src="/logo.png"
+            alt="Logo"
+            className="h-12 w-12 object-contain"
+          />
           <h1 className="text-xl font-bold uppercase">Dot Admin</h1>
         </div>
 
-        
         <button
           onClick={() => setCollapsed(!collapsed)}
           className="hidden lg:flex text-blue-600 bg-gray-100 h-10 w-10 items-center justify-center rounded-full text-xl"
@@ -58,7 +59,6 @@ const TopHeader = ({ collapsed, setCollapsed, visible, setVisible }) => {
           <MenuOutlined />
         </button>
 
-       
         <button
           onClick={() => setVisible(true)}
           className="flex lg:hidden text-blue-600 bg-gray-100 h-10 w-10 items-center justify-center rounded-full text-xl"
@@ -66,7 +66,6 @@ const TopHeader = ({ collapsed, setCollapsed, visible, setVisible }) => {
           <MenuOutlined />
         </button>
 
-       
         <Input
           placeholder="Search..."
           prefix={<SearchOutlined />}
@@ -74,12 +73,10 @@ const TopHeader = ({ collapsed, setCollapsed, visible, setVisible }) => {
         />
       </div>
 
-     
       <h2 className="text-lg font-semibold text-gray-800 hidden md:block">
         {pageTitle}
       </h2>
 
-   
       <div className="flex items-center gap-3">
         <div className="text-right hidden sm:block">
           <div className="font-medium">{user.name}</div>

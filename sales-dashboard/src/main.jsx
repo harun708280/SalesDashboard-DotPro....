@@ -4,12 +4,15 @@ import "./index.css";
 
 import { RouterProvider } from "react-router-dom";
 import router from "./routes/Route.jsx";
+import { FaqProvider } from "./context/FaqContext.jsx";
 
 
 function MainApp() {
   return (
     <StrictMode>
+      <FaqProvider>
       <RouterProvider router={router} />
+      </FaqProvider>
     </StrictMode>
   );
 }

@@ -1,6 +1,9 @@
 import { createBrowserRouter } from "react-router-dom";
 import Layout from "../Layout/Layout";
 import Dashboard from "../page/Dashboard";
+import FAQSettings from "../page/FAQSettings";
+
+
 
 const router = createBrowserRouter([
   {
@@ -10,6 +13,11 @@ const router = createBrowserRouter([
         {
             path:'/',
             element:<Dashboard/>
+        },
+
+        {
+          path:'/faq',
+          element:<FAQSettings/>
         }
     ]
   }

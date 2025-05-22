@@ -6,7 +6,7 @@ import CustomerTable from '../components/CustomerTable';
 
 const Dashboard = () => {
     return (
-        <div className=''>
+        <div className='mx-4'>
             <Card/>
             <SalesChart/>
             <CustomerTable/>

@@ -22,7 +22,7 @@ const SidebarMenu = ({collapsed,setCollapsed,visible,setVisible}) => {
     {
       key: '/faq',
       icon: <QuestionCircleOutlined />,
-      label: <Link to="/faq">FAQ</Link>,
+      label: <Link to="/faq">FAQ Settings</Link>,
     },
   ];
 
