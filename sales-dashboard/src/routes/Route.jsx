@@ -1,11 +1,17 @@
 import { createBrowserRouter } from "react-router-dom";
 import Layout from "../Layout/Layout";
+import Dashboard from "../page/Dashboard";
 
-// 🔧 এখানে Array হওয়া উচিত!
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Layout />,
+    children:[
+        {
+            path:'/',
+            element:<Dashboard/>
+        }
+    ]
   }
 ]);
 
