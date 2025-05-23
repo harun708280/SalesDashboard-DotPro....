@@ -6,7 +6,7 @@ import {
   SearchOutlined,
   LogoutOutlined,
 } from "@ant-design/icons";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 
 const TopHeader = ({ collapsed, setCollapsed, visible, setVisible }) => {
@@ -54,6 +54,7 @@ const TopHeader = ({ collapsed, setCollapsed, visible, setVisible }) => {
   return (
     <div className="w-full transition-all duration-300 bg-white h-20 py-2 flex items-center justify-between sticky top-0 z-40 px-4">
       <div className="flex items-center gap-4">
+        <Link to='/dashboard'>
         <div className="flex items-center gap-2 w-[220px]">
           <img
             src="/logo.png"
@@ -62,6 +63,8 @@ const TopHeader = ({ collapsed, setCollapsed, visible, setVisible }) => {
           />
           <h1 className="text-xl font-bold uppercase">Dot Admin</h1>
         </div>
+        </Link>
+        
 
         {/* Desktop Sidebar Toggle Button */}
         <Button
