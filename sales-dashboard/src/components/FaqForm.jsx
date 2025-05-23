@@ -36,6 +36,7 @@ const FaqForm = ({ visible, onClose, editingIndex, initialValues }) => {
       onCancel={onClose}
       onOk={() => form.submit()}
     >
+      
       <Form form={form} layout="vertical" onFinish={handleFinish}>
         {/*  Question Input */}
         <Form.Item
