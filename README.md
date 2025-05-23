@@ -2,13 +2,8 @@
 
 A responsive sales analytics dashboard built with React, Ant Design, Recharts, and React Router. The dashboard allows users to filter data by date, toggle between daily and weekly views, switch between line and bar charts, and download the chart as PNG, PDF, or CSV.
 
-## 🚀 Live Demo
+#[ View Live Demo](https://dot-admin-harun.netlify.app))
 
-[![Dashboard Screenshot](./dashboard.png)](https://dot-admin-harun.netlify.app)
-
-> Click the image above to view the live version of the dashboard.
-
----
 
 ##  Tech Stack
 
