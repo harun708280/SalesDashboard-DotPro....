@@ -1,15 +1,12 @@
 import React from "react";
 import { Button, Popconfirm, Table } from "antd";
 import { useFaq } from "../context/FaqContext";
-
-
+import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 const FaqTable = ({ onEdit }) => {
-  
   //  Context Get FAQs and delete function
- 
+
   const { faqs, deleteFaq } = useFaq();
 
- 
   const columns = [
     {
       title: "Question",
@@ -28,29 +25,40 @@ const FaqTable = ({ onEdit }) => {
       key: "actions",
       width: 120,
       render: (_, __, index) => (
-        <>
-         
-          <Button type="link" onClick={() => onEdit(index)}>
+        <div className="flex space-x-2">
+          {/* Edit Button */}
+          <Button
+            type="primary"
+            icon={<EditOutlined />}
+            onClick={() => onEdit(index)}
+            size="small"
+          >
             Edit
           </Button>
 
-          {/*  Delete with Confirmation */}
+          {/* Delete Button with Confirmation */}
           <Popconfirm
             title="Are you sure you want to delete this FAQ?"
             onConfirm={() => deleteFaq(index)}
+            okText="Yes"
+            cancelText="No"
           >
-            <Button type="link" danger>
+            <Button
+              type="primary"
+              danger
+              icon={<DeleteOutlined />}
+              size="small"
+            >
               Delete
             </Button>
           </Popconfirm>
-        </>
+        </div>
       ),
     },
   ];
 
-  
   //  Table
-  
+
   return (
     <Table
       dataSource={faqs}
