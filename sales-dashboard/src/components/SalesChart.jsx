@@ -19,7 +19,6 @@ import { startOfWeek, format } from "date-fns";
 import { Button, Dropdown, Menu } from "antd";
 import { DownloadOutlined } from "@ant-design/icons";
 
-// Generate dummy data dynamically from May 1 to today
 const generateDummyData = () => {
   const start = new Date("2025-05-01");
   const today = new Date();
@@ -35,7 +34,6 @@ const generateDummyData = () => {
 
 const dummyData = generateDummyData();
 
-// Get weekly summed data
 const getWeeklyData = (data) => {
   const weeklyMap = {};
   data.forEach(({ date, sales }) => {
@@ -60,7 +58,6 @@ const SalesChart = () => {
 
   const filteredData = viewType === "daily" ? filteredDailyData : getWeeklyData(filteredDailyData);
 
-  // Download Handlers
   const downloadImage = () => {
     const chartEl = document.getElementById("chart-container");
     html2canvas(chartEl).then((canvas) => {
@@ -94,37 +91,23 @@ const SalesChart = () => {
     });
   };
 
-  // Ant Design Dropdown Menu
   const downloadMenu = (
     <Menu
       items={[
-        {
-          key: "png",
-          label: "Download PNG",
-          onClick: downloadImage,
-        },
-        {
-          key: "csv",
-          label: "Download CSV",
-          onClick: downloadCSV,
-        },
-        {
-          key: "pdf",
-          label: "Download PDF",
-          onClick: downloadPDF,
-        },
+        { key: "png", label: "Download PNG", onClick: downloadImage },
+        { key: "csv", label: "Download CSV", onClick: downloadCSV },
+        { key: "pdf", label: "Download PDF", onClick: downloadPDF },
       ]}
     />
   );
 
   return (
-    <div className="bg-white mx-4 my-12 p-4 rounded-xl shadow-md">
-      <div className="flex flex-wrap items-center justify-between gap-4 mb-4">
-        {/* Date Range Picker */}
+    <div className="bg-white mx-2 sm:mx-4 border my-6 sm:my-12 py-4 px-2 sm:px-4 rounded-xl shadow">
+      <div className="flex  lg:flex-row flex-wrap items-center justify-between gap-4 mb-4">
         <div className="flex items-center gap-2 flex-wrap">
-          <label className="px-3 py-1 rounded text-sm font-medium uppercase bg-blue-600 text-white ml-2">
+          <span className="px-3 py-1 rounded text-sm font-medium uppercase bg-blue-600 text-white ml-0">
             Start
-          </label>
+          </span>
           <DatePicker
             selected={startDate}
             onChange={(date) => date && setStartDate(date)}
@@ -135,9 +118,9 @@ const SalesChart = () => {
             dateFormat="yyyy-MM-dd"
             className="border p-1 rounded"
           />
-          <label className="px-3 py-1 rounded text-sm font-medium uppercase bg-blue-600 text-white ml-2">
+          <span className="px-3 py-1 rounded text-sm font-medium uppercase bg-blue-600 text-white">
             End
-          </label>
+          </span>
           <DatePicker
             selected={endDate}
             onChange={(date) => date && setEndDate(date)}
@@ -151,23 +134,21 @@ const SalesChart = () => {
           />
         </div>
 
-        {/* Chart Type Buttons */}
-        <div className="flex gap-2">
+        <div className="flex gap-2 flex-wrap">
           {["line", "bar"].map((type) => (
             <button
               key={type}
               onClick={() => setChartType(type)}
-              className={`px-3 py-1 rounded text-sm font-medium ${
+              className={`px-3 py-1 rounded text-sm font-medium uppercase ${
                 chartType === type ? "bg-blue-600 text-white" : "bg-gray-200"
               }`}
             >
-              {type.toUpperCase()}
+              {type}
             </button>
           ))}
         </div>
 
-        {/* View Type Buttons */}
-        <div className="flex gap-2">
+        <div className="flex gap-2 flex-wrap">
           {["daily", "weekly"].map((type) => (
             <button
               key={type}
@@ -176,19 +157,17 @@ const SalesChart = () => {
                 viewType === type ? "bg-blue-600 text-white" : "bg-gray-200"
               }`}
             >
-              {type.charAt(0).toUpperCase() + type.slice(1)}
+              {type}
             </button>
           ))}
         </div>
 
-        {/* Download Dropdown */}
         <Dropdown overlay={downloadMenu} placement="bottomRight" arrow>
           <Button icon={<DownloadOutlined />}>Download</Button>
         </Dropdown>
       </div>
 
-      {/* Chart Container */}
-      <div id="chart-container" className="h-72">
+      <div id="chart-container" className="h-64 sm:h-72 w-full">
         <ResponsiveContainer width="100%" height="100%">
           {chartType === "line" ? (
             <LineChart data={filteredData}>
