@@ -1,12 +1,47 @@
-# React + Vite
+#  Sales Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A responsive sales analytics dashboard built with React, Ant Design, Recharts, and React Router. The dashboard allows users to filter data by date, toggle between daily and weekly views, switch between line and bar charts, and download the chart as PNG, PDF, or CSV.
 
-Currently, two official plugins are available:
+## 🚀 Live Demo
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+[![Dashboard Screenshot](./dashboard.png)](https://dot-admin-harun.netlify.app)
 
-## Expanding the ESLint configuration
+> Click the image above to view the live version of the dashboard.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+##  Tech Stack
+
+- **React** (Functional Components with Hooks)
+- **Ant Design** (UI Components)
+- **Recharts** (Charting Library)
+- **React Router DOM** (Page Routing)
+- **JS Cookie** (Token storage in browser cookies)
+- **Tailwind CSS** (Styling)
+- **Vite** (Development & Build Tool)
+
+---
+
+##  Features
+
+-  **Date Filter:** Select start and end dates
+-  **Chart Types:** Toggle between Line and Bar charts
+-  **View Modes:** Daily and Weekly aggregation
+-  **Export Options:** Download as PNG, PDF, or CSV
+-  **Login System:** Simple login using cookies
+-  **Responsive Design:** Optimized for desktop and tablets
+
+---
+
+## 📦 Getting Started
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/harun708280/SalesDashboard-DotPro.....git
+cd sales-dashboard
+npm install
+npm run dev
+http://localhost:5173
+
+

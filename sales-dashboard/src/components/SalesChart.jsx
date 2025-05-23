@@ -116,7 +116,10 @@ const SalesChart = () => {
     />
   );
   return (
-    <div className="bg-white mx-2 md:mx-4 border my-6 sm:my-12 py-4 px-2 sm:px-4 rounded-xl shadow">
+    <div className="bg-white mx-2 md:mx-4 my-6 sm:my-12 py-4 px-2 sm:px-4 rounded-xl shadow">
+      <h2 className="text-xl  md:text-2xl font-semibold text-gray-800 mb-6  text-left">
+      Sales Chart Overview
+    </h2>
       <div className="flex lg:flex-row flex-wrap items-center justify-between gap-4 mb-4">
         {/*  Date Pickers */}
         <div className="flex items-center gap-2 flex-wrap">

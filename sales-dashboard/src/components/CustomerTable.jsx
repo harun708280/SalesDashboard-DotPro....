@@ -108,7 +108,7 @@ const CustomerTable = () => {
   return (
     <div className="p-4 bg-white rounded-xl shadow-md mx-2 md:mx-4">
       {/* 🔠 Header */}
-      <h2 className="text-2xl font-semibold mb-6 text-gray-800">
+      <h2 className=" md:text-2xl font-semibold mb-6 text-gray-800">
         Customer Details
       </h2>
 

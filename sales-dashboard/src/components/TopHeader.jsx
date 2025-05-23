@@ -68,15 +68,16 @@ const TopHeader = ({ collapsed, setCollapsed, visible, setVisible }) => {
           type="text"
           icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
           onClick={() => setCollapsed(!collapsed)}
-          className="hidden  lg:flex items-center rounded-full justify-center text-blue-600 bg-gray-100 h-12 w-12  text-xl"
+          className="hidden lg:flex rounded-full justify-center items-center text-blue-600 bg-gray-100 text-xl"
+          style={{ height: 40, width: 40 }}
         />
 
-        {/* Mobile Drawer Toggle Button */}
         <Button
           type="text"
           icon={visible ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
           onClick={() => setVisible(true)}
-          className="flex lg:hidden items-center justify-center text-blue-600 bg-gray-100 h-10 w-10 rounded-full text-xl"
+          className="flex lg:hidden rounded-full justify-center items-center text-blue-600 bg-gray-100 text-xl"
+          style={{ height: 35, width: 35 }}
         />
 
         <div className="hidden md:block">

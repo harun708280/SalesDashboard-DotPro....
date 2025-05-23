@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Layout, Menu, Drawer } from 'antd';
 import {
+  AppstoreOutlined,
   DashboardOutlined,
   QuestionCircleOutlined,
 } from '@ant-design/icons';
@@ -17,7 +18,7 @@ const SidebarMenu = ({ collapsed, setCollapsed, visible, setVisible }) => {
   const menuItems = [
     {
       key: '/dashboard',
-      icon: <DashboardOutlined />,
+      icon: <AppstoreOutlined />,
       label: <Link to="/dashboard">Dashboard</Link>,
     },
     {
