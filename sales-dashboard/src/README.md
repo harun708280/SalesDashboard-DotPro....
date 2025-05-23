@@ -33,7 +33,7 @@ A responsive sales analytics dashboard built with React, Ant Design, Recharts, a
 
 ---
 
-## 📦 Getting Started
+##  Getting Started
 
 ### 1. Clone the Repository
 
