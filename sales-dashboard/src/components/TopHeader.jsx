@@ -4,7 +4,8 @@ import {
   MenuOutlined,
   SearchOutlined,
   LogoutOutlined,
-  UserOutlined,
+  MenuUnfoldOutlined,
+  MenuFoldOutlined,
 } from "@ant-design/icons";
 import { useLocation, useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
@@ -15,7 +16,7 @@ const TopHeader = ({ collapsed, setCollapsed, visible, setVisible }) => {
 
   const getTitleFromPath = (pathname) => {
     switch (pathname) {
-      case "/":
+      case "/dashboard":
         return "Dashboard";
       case "/faq":
         return "FAQ";
@@ -39,12 +40,12 @@ const TopHeader = ({ collapsed, setCollapsed, visible, setVisible }) => {
   const menu = (
     <Menu>
       <Menu.Item key="userinfo" disabled>
-      <div className="flex flex-col px-2 py-1 select-none">
-        <span className="font-semibold">{user.name}</span>
-        <span className="text-xs text-gray-500">{user.email}</span>
-      </div>
-    </Menu.Item>
-    <Menu.Divider />
+        <div className="flex flex-col px-2 py-1 select-none">
+          <span className="font-semibold">{user.name}</span>
+          <span className="text-xs text-gray-500">{user.email}</span>
+        </div>
+      </Menu.Item>
+      <Menu.Divider />
       <Menu.Item icon={<LogoutOutlined />} key="logout" onClick={handleLogout}>
         Logout
       </Menu.Item>
@@ -67,24 +68,31 @@ const TopHeader = ({ collapsed, setCollapsed, visible, setVisible }) => {
           onClick={() => setCollapsed(!collapsed)}
           className="hidden lg:flex text-blue-600 bg-gray-100 h-10 w-10 items-center justify-center rounded-full text-xl"
         >
-          <MenuOutlined />
+          {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
         </button>
 
         <button
           onClick={() => setVisible(true)}
           className="flex lg:hidden text-blue-600 bg-gray-100 h-10 w-10 items-center justify-center rounded-full text-xl"
         >
-          <MenuOutlined />
+          {visible ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
         </button>
 
-        <Input
-          placeholder="Search..."
-          prefix={<SearchOutlined />}
-          className="w-32 hidden sm:w-56 bg-gray-100"
-        />
+        <div className="hidden md:block">
+          <Input
+            placeholder="Search..."
+            prefix={<SearchOutlined className="text-gray-400" />}
+            className="bg-gray-100 rounded-md border border-transparent focus:border-blue-500 focus:ring-1 focus:ring-blue-500
+             w-40  md:w-56 lg:w-64
+             text-sm
+             placeholder-gray-500
+             transition
+             "
+          />
+        </div>
       </div>
 
-      <h2 className="text-lg font-semibold text-gray-800 hidden md:block">
+      <h2 className="text-lg  font-semibold text-gray-800 hidden lg:block">
         {pageTitle}
       </h2>
 
@@ -93,7 +101,7 @@ const TopHeader = ({ collapsed, setCollapsed, visible, setVisible }) => {
           <div className="font-medium">{user.name}</div>
           <div className="text-xs text-gray-500">{user.email}</div>
         </div>
-        <Dropdown overlay={menu}  placement="bottomRight">
+        <Dropdown overlay={menu} placement="bottomRight">
           <Avatar style={{ backgroundColor: "#1890ff" }} size="large">
             {user.name.charAt(0)}
           </Avatar>
