@@ -19,6 +19,8 @@ import { startOfWeek, format } from "date-fns";
 import { Button, Dropdown, Menu } from "antd";
 import { DownloadOutlined } from "@ant-design/icons";
 
+//  Dummy Data Generator
+
 const generateDummyData = () => {
   const start = new Date("2025-05-01");
   const today = new Date();
@@ -34,29 +36,42 @@ const generateDummyData = () => {
 
 const dummyData = generateDummyData();
 
+//  Transform Daily to Weekly
 const getWeeklyData = (data) => {
   const weeklyMap = {};
   data.forEach(({ date, sales }) => {
-    const weekStart = format(startOfWeek(new Date(date), { weekStartsOn: 1 }), "yyyy-MM-dd");
+    const weekStart = format(
+      startOfWeek(new Date(date), { weekStartsOn: 1 }),
+      "yyyy-MM-dd"
+    );
     weeklyMap[weekStart] = (weeklyMap[weekStart] || 0) + sales;
   });
 
   return Object.entries(weeklyMap).map(([date, sales]) => ({ date, sales }));
 };
 
+
 const SalesChart = () => {
+  //  Date States
+
   const today = new Date();
-  const [chartType, setChartType] = useState("line");
-  const [viewType, setViewType] = useState("daily");
   const [startDate, setStartDate] = useState(new Date("2025-05-01"));
   const [endDate, setEndDate] = useState(today);
+
+  const [chartType, setChartType] = useState("line");
+  const [viewType, setViewType] = useState("daily");
+
+  //  Filtered Data
 
   const filteredDailyData = dummyData.filter(({ date }) => {
     const d = new Date(date);
     return d >= startDate && d <= endDate;
   });
 
-  const filteredData = viewType === "daily" ? filteredDailyData : getWeeklyData(filteredDailyData);
+  const filteredData =
+    viewType === "daily" ? filteredDailyData : getWeeklyData(filteredDailyData);
+
+  // Download Handlers
 
   const downloadImage = () => {
     const chartEl = document.getElementById("chart-container");
@@ -100,10 +115,10 @@ const SalesChart = () => {
       ]}
     />
   );
-
   return (
     <div className="bg-white mx-2 md:mx-4 border my-6 sm:my-12 py-4 px-2 sm:px-4 rounded-xl shadow">
-      <div className="flex  lg:flex-row flex-wrap items-center justify-between gap-4 mb-4">
+      <div className="flex lg:flex-row flex-wrap items-center justify-between gap-4 mb-4">
+        {/*  Date Pickers */}
         <div className="flex items-center gap-2 flex-wrap">
           <span className="px-3 py-1 rounded text-sm font-medium uppercase bg-blue-600 text-white ml-0">
             Start
@@ -134,39 +149,39 @@ const SalesChart = () => {
           />
         </div>
 
+        {/*  Chart Type Buttons */}
         <div className="flex gap-2 flex-wrap">
           {["line", "bar"].map((type) => (
-            <button
+            <Button
               key={type}
+              type={chartType === type ? "primary" : "default"}
               onClick={() => setChartType(type)}
-              className={`px-3 py-1 rounded text-sm font-medium uppercase ${
-                chartType === type ? "bg-blue-600 text-white" : "bg-gray-200"
-              }`}
             >
-              {type}
-            </button>
+              {type.toUpperCase()}
+            </Button>
           ))}
         </div>
 
+        {/*  View Type Buttons */}
         <div className="flex gap-2 flex-wrap">
           {["daily", "weekly"].map((type) => (
-            <button
+            <Button
               key={type}
+              type={viewType === type ? "primary" : "default"}
               onClick={() => setViewType(type)}
-              className={`px-3 py-1 rounded text-sm font-medium uppercase ${
-                viewType === type ? "bg-blue-600 text-white" : "bg-gray-200"
-              }`}
             >
-              {type}
-            </button>
+              {type.toUpperCase()}
+            </Button>
           ))}
         </div>
 
+        {/*  Download Dropdown */}
         <Dropdown overlay={downloadMenu} placement="bottomRight" arrow>
           <Button icon={<DownloadOutlined />}>Download</Button>
         </Dropdown>
       </div>
 
+      {/*  Chart Display */}
       <div id="chart-container" className="h-64 sm:h-72 w-full">
         <ResponsiveContainer width="100%" height="100%">
           {chartType === "line" ? (
@@ -175,7 +190,12 @@ const SalesChart = () => {
               <XAxis dataKey="date" />
               <YAxis />
               <Tooltip />
-              <Line type="monotone" dataKey="sales" stroke="#1D4ED8" strokeWidth={2} />
+              <Line
+                type="monotone"
+                dataKey="sales"
+                stroke="#1D4ED8"
+                strokeWidth={2}
+              />
             </LineChart>
           ) : (
             <BarChart data={filteredData}>

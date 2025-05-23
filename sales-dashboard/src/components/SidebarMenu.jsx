@@ -1,17 +1,18 @@
 import React, { useState } from 'react';
-import { Layout, Menu, Drawer, Button } from 'antd';
+import { Layout, Menu, Drawer } from 'antd';
 import {
   DashboardOutlined,
   QuestionCircleOutlined,
-  MenuOutlined,
 } from '@ant-design/icons';
 import { Link, useLocation } from 'react-router-dom';
 
 const { Sider } = Layout;
 
-const SidebarMenu = ({collapsed,setCollapsed,visible,setVisible}) => {
-  
+const SidebarMenu = ({ collapsed, setCollapsed, visible, setVisible }) => {
   const location = useLocation();
+
+
+  //  Sidebar Menu Items
 
   const menuItems = [
     {
@@ -26,24 +27,19 @@ const SidebarMenu = ({collapsed,setCollapsed,visible,setVisible}) => {
     },
   ];
 
-  // ✅ Desktop Sidebar
+
   const renderSidebar = (
     <Sider
       collapsible
       collapsed={collapsed}
       onCollapse={setCollapsed}
-      collapsedWidth={0} 
-      trigger={null}     
+      collapsedWidth={0}
+      trigger={null}
       breakpoint="lg"
       className="hidden lg:block min-h-screen bg-white fixed top-[80px] left-0 z-20 transition-all duration-300"
-style={{ width: collapsed ? 80 : 260 }}
-
+      style={{ width: collapsed ? 80 : 260 }}
       width={260}
-      
     >
-      
-      
-
       <Menu
         theme="light"
         mode="inline"
@@ -55,6 +51,8 @@ style={{ width: collapsed ? 80 : 260 }}
   );
 
   
+  //  Mobile Drawer 
+ 
   const renderDrawer = (
     <Drawer
       title="Dot Admin"
@@ -68,15 +66,14 @@ style={{ width: collapsed ? 80 : 260 }}
         mode="inline"
         selectedKeys={[location.pathname]}
         items={menuItems}
+        onClick={() => setVisible(false)}
       />
     </Drawer>
   );
 
+ 
   return (
     <>
-      
- 
-
       {renderSidebar}
       {renderDrawer}
     </>

@@ -2,10 +2,13 @@ import React, { useEffect } from "react";
 import { Form, Input, Modal } from "antd";
 import { useFaq } from "../context/FaqContext";
 
-
 const FaqForm = ({ visible, onClose, editingIndex, initialValues }) => {
+  //  Hook and Context
+
   const [form] = Form.useForm();
   const { addFaq, updateFaq } = useFaq();
+
+  //  Populate form on edit or reset on create
 
   useEffect(() => {
     if (initialValues) {
@@ -14,6 +17,8 @@ const FaqForm = ({ visible, onClose, editingIndex, initialValues }) => {
       form.resetFields();
     }
   }, [initialValues]);
+
+  //  Handle Form Submission
 
   const handleFinish = (values) => {
     if (editingIndex !== null) {
@@ -32,6 +37,7 @@ const FaqForm = ({ visible, onClose, editingIndex, initialValues }) => {
       onOk={() => form.submit()}
     >
       <Form form={form} layout="vertical" onFinish={handleFinish}>
+        {/*  Question Input */}
         <Form.Item
           name="question"
           label="Question"
@@ -39,6 +45,8 @@ const FaqForm = ({ visible, onClose, editingIndex, initialValues }) => {
         >
           <Input />
         </Form.Item>
+
+        {/* Answer Input */}
         <Form.Item
           name="answer"
           label="Answer"

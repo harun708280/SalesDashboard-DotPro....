@@ -1,11 +1,10 @@
 import React from "react";
 import { Input, Avatar, Dropdown, Menu, Button } from "antd";
 import {
-  MenuOutlined,
-  SearchOutlined,
-  LogoutOutlined,
   MenuUnfoldOutlined,
   MenuFoldOutlined,
+  SearchOutlined,
+  LogoutOutlined,
 } from "@ant-design/icons";
 import { useLocation, useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
@@ -53,7 +52,7 @@ const TopHeader = ({ collapsed, setCollapsed, visible, setVisible }) => {
   );
 
   return (
-    <div className="w-full bg-white h-20 py-2 flex items-center justify-between sticky top-0 z-40 px-4">
+    <div className="w-full transition-all duration-300 bg-white h-20 py-2 flex items-center justify-between sticky top-0 z-40 px-4">
       <div className="flex items-center gap-4">
         <div className="flex items-center gap-2 w-[220px]">
           <img
@@ -64,35 +63,32 @@ const TopHeader = ({ collapsed, setCollapsed, visible, setVisible }) => {
           <h1 className="text-xl font-bold uppercase">Dot Admin</h1>
         </div>
 
-        <button
+        {/* Desktop Sidebar Toggle Button */}
+        <Button
+          type="text"
+          icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
           onClick={() => setCollapsed(!collapsed)}
-          className="hidden lg:flex text-blue-600 bg-gray-100 h-10 w-10 items-center justify-center rounded-full text-xl"
-        >
-          {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-        </button>
+          className="hidden  lg:flex items-center rounded-full justify-center text-blue-600 bg-gray-100 h-12 w-12  text-xl"
+        />
 
-        <button
+        {/* Mobile Drawer Toggle Button */}
+        <Button
+          type="text"
+          icon={visible ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
           onClick={() => setVisible(true)}
-          className="flex lg:hidden text-blue-600 bg-gray-100 h-10 w-10 items-center justify-center rounded-full text-xl"
-        >
-          {visible ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-        </button>
+          className="flex lg:hidden items-center justify-center text-blue-600 bg-gray-100 h-10 w-10 rounded-full text-xl"
+        />
 
         <div className="hidden md:block">
           <Input
             placeholder="Search..."
             prefix={<SearchOutlined className="text-gray-400" />}
-            className="bg-gray-100 rounded-md border border-transparent focus:border-blue-500 focus:ring-1 focus:ring-blue-500
-             w-40  md:w-56 lg:w-64
-             text-sm
-             placeholder-gray-500
-             transition
-             "
+            className="bg-gray-100 rounded-md border border-transparent focus:border-blue-500 focus:ring-1 focus:ring-blue-500 w-40 md:w-56 lg:w-64 text-sm placeholder-gray-500 transition"
           />
         </div>
       </div>
 
-      <h2 className="text-lg  font-semibold text-gray-800 hidden lg:block">
+      <h2 className="text-lg font-semibold text-gray-800 hidden lg:block">
         {pageTitle}
       </h2>
 
@@ -101,11 +97,14 @@ const TopHeader = ({ collapsed, setCollapsed, visible, setVisible }) => {
           <div className="font-medium">{user.name}</div>
           <div className="text-xs text-gray-500">{user.email}</div>
         </div>
+
         <Dropdown overlay={menu} placement="bottomRight">
           <Avatar style={{ backgroundColor: "#1890ff" }} size="large">
             {user.name.charAt(0)}
           </Avatar>
         </Dropdown>
+
+        {/* Desktop Logout Button */}
         <Button
           type="primary"
           className="hidden lg:block"

@@ -1,4 +1,4 @@
-// /src/data/customerData.js
+
 
 export const customerData = [
   { key: "1", name: "John Doe", email: "john@example.com", amount: 250, date: "2025-05-10" },

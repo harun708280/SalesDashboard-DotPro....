@@ -10,6 +10,8 @@ import {
 } from "@ant-design/icons";
 
 const Card = () => {
+  //  Card Data Configuration
+
   const cards = [
     {
       title: "Total Sales",
@@ -38,7 +40,6 @@ const Card = () => {
       bgFrom: "from-pink-500",
       bgTo: "to-pink-700",
     },
-    
     {
       title: "Total Reviews",
       value: 88,
@@ -57,10 +58,12 @@ const Card = () => {
           key={i}
           className={`rounded-xl p-5 text-white w-full shadow-md relative bg-gradient-to-r ${card.bgFrom} ${card.bgTo}`}
         >
+          {/*  Card Content Section */}
           <div className="flex justify-between items-start">
             <div>
               <p className="text-sm font-semibold">{card.title}</p>
               <h2 className="text-3xl font-bold">{card.value}</h2>
+
               <div className="flex items-center gap-1 opacity-90">
                 {card.trend === "up" ? (
                   <ArrowUpOutlined className="text-white" />

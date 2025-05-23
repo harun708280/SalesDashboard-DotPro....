@@ -17,10 +17,14 @@ import { customerData } from "../Data/customerData";
 const { RangePicker } = DatePicker;
 
 const CustomerTable = () => {
+
   const [filteredData, setFilteredData] = useState(customerData);
   const [amount, setAmount] = useState(null);
   const [dateRange, setDateRange] = useState(null);
 
+  
+  //  Table Column 
+ 
   const columns = [
     { title: "Customer Name", dataIndex: "name", key: "name" },
     { title: "Email", dataIndex: "email", key: "email" },
@@ -28,6 +32,8 @@ const CustomerTable = () => {
     { title: "Date", dataIndex: "date", key: "date" },
   ];
 
+  //  Filtering 
+ 
   const handleFilter = () => {
     let filtered = [...customerData];
 
@@ -49,6 +55,9 @@ const CustomerTable = () => {
     setFilteredData(filtered);
   };
 
+  
+  //  Download CSV
+  
   const downloadCSV = () => {
     const csvRows = [
       ["Name", "Email", "Amount", "Date"],
@@ -61,6 +70,8 @@ const CustomerTable = () => {
     saveAs(blob, "customer-data.csv");
   };
 
+  //  Download PDF
+  
   const downloadPDF = () => {
     const table = document.getElementById("customer-table");
     html2canvas(table).then((canvas) => {
@@ -73,6 +84,9 @@ const CustomerTable = () => {
     });
   };
 
+  
+  //  Download Menu Dropdown
+ 
   const downloadMenu = (
     <Menu
       items={[
@@ -90,12 +104,15 @@ const CustomerTable = () => {
     />
   );
 
+
   return (
     <div className="p-4 bg-white rounded-xl shadow-md mx-2 md:mx-4">
+      {/* 🔠 Header */}
       <h2 className="text-2xl font-semibold mb-6 text-gray-800">
         Customer Details
       </h2>
 
+      {/*  Filter & Download Options */}
       <div className="flex flex-col md:flex-row justify-between gap-4 flex-wrap mb-6">
         <div className="flex flex-col sm:flex-row gap-3 flex-wrap w-full md:w-auto">
           <RangePicker
@@ -114,6 +131,7 @@ const CustomerTable = () => {
           </Button>
         </div>
 
+        {/*  Download Button */}
         <Dropdown overlay={downloadMenu} placement="bottomRight" arrow>
           <Button
             icon={<DownloadOutlined />}
@@ -124,6 +142,7 @@ const CustomerTable = () => {
         </Dropdown>
       </div>
 
+      {/*  Data Table */}
       <div id="customer-table" className="overflow-auto">
         <Table
           columns={columns}

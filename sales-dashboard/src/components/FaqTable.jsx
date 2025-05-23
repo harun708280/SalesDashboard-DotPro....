@@ -4,8 +4,12 @@ import { useFaq } from "../context/FaqContext";
 
 
 const FaqTable = ({ onEdit }) => {
+  
+  //  Context Get FAQs and delete function
+ 
   const { faqs, deleteFaq } = useFaq();
 
+ 
   const columns = [
     {
       title: "Question",
@@ -25,9 +29,12 @@ const FaqTable = ({ onEdit }) => {
       width: 120,
       render: (_, __, index) => (
         <>
+         
           <Button type="link" onClick={() => onEdit(index)}>
             Edit
           </Button>
+
+          {/*  Delete with Confirmation */}
           <Popconfirm
             title="Are you sure you want to delete this FAQ?"
             onConfirm={() => deleteFaq(index)}
@@ -41,6 +48,9 @@ const FaqTable = ({ onEdit }) => {
     },
   ];
 
+  
+  //  Table
+  
   return (
     <Table
       dataSource={faqs}
