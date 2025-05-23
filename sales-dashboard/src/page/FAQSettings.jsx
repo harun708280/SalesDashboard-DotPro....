@@ -19,7 +19,7 @@ const FAQSettings = () => {
 
   return (
     <div className="p-4 mx-4  bg-white rounded shadow">
-      <div className="flex justify-between items-center mb-4">
+      <div className="flex justify-between flex-wrap items-center mb-4">
         <h2 className="text-xl font-semibold">FAQ Settings</h2>
         <Button
           type="primary"

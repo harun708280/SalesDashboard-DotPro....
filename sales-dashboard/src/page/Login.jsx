@@ -23,10 +23,10 @@ const Login = () => {
 
   return (
     <div
-      className="min-h-screen bg-cover bg-center flex items-center justify-center"
-      style={{ backgroundImage: "url('/bgLogin.png')" }}
+      className="min-h-screen bg-cover bg-center bg-[#041643] flex items-center justify-center"
+      style={{ backgroundImage: "url('/login-Bg.png')" }}
     >
-      <div className="bg-white/20 backdrop-blur-md rounded-2xl shadow-xl p-8 w-[90%] max-w-md mx-auto">
+      <div className="bg-white/10 backdrop-blur-md rounded-2xl shadow-xl p-8 w-[90%] max-w-md mx-auto">
         <div className="flex justify-center mb-6">
           <img src="/logo2.png" alt="Logo" className="h-12 bg-white rounded-full object-cover" />
         </div>
@@ -55,7 +55,7 @@ const Login = () => {
           </div>
           <button
             type="submit"
-            className="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 rounded transition duration-300"
+            className="w-full bg-[#041643] hover:bg-blue-600 text-white font-semibold py-2 rounded transition duration-300"
           >
             Login
           </button>

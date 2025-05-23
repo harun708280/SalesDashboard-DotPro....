@@ -102,7 +102,7 @@ const SalesChart = () => {
   );
 
   return (
-    <div className="bg-white mx-2 sm:mx-4 border my-6 sm:my-12 py-4 px-2 sm:px-4 rounded-xl shadow">
+    <div className="bg-white mx-2 md:mx-4 border my-6 sm:my-12 py-4 px-2 sm:px-4 rounded-xl shadow">
       <div className="flex  lg:flex-row flex-wrap items-center justify-between gap-4 mb-4">
         <div className="flex items-center gap-2 flex-wrap">
           <span className="px-3 py-1 rounded text-sm font-medium uppercase bg-blue-600 text-white ml-0">
