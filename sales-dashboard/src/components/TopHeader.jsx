@@ -1,15 +1,17 @@
 import React from "react";
-import { Input, Avatar, Dropdown, Menu } from "antd";
+import { Input, Avatar, Dropdown, Menu, Button } from "antd";
 import {
   MenuOutlined,
   SearchOutlined,
   LogoutOutlined,
   UserOutlined,
 } from "@ant-design/icons";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
 
 const TopHeader = ({ collapsed, setCollapsed, visible, setVisible }) => {
   const location = useLocation();
+  const navigate = useNavigate();
 
   const getTitleFromPath = (pathname) => {
     switch (pathname) {
@@ -29,12 +31,21 @@ const TopHeader = ({ collapsed, setCollapsed, visible, setVisible }) => {
     email: "harun@example.com",
   };
 
+  const handleLogout = () => {
+    Cookies.remove("mockToken");
+    navigate("/");
+  };
+
   const menu = (
     <Menu>
-      <Menu.Item icon={<UserOutlined />} key="profile">
-        Profile
-      </Menu.Item>
-      <Menu.Item icon={<LogoutOutlined />} key="logout">
+      <Menu.Item key="userinfo" disabled>
+      <div className="flex flex-col px-2 py-1 select-none">
+        <span className="font-semibold">{user.name}</span>
+        <span className="text-xs text-gray-500">{user.email}</span>
+      </div>
+    </Menu.Item>
+    <Menu.Divider />
+      <Menu.Item icon={<LogoutOutlined />} key="logout" onClick={handleLogout}>
         Logout
       </Menu.Item>
     </Menu>
@@ -69,7 +80,7 @@ const TopHeader = ({ collapsed, setCollapsed, visible, setVisible }) => {
         <Input
           placeholder="Search..."
           prefix={<SearchOutlined />}
-          className="w-32 sm:w-56 bg-gray-100"
+          className="w-32 hidden sm:w-56 bg-gray-100"
         />
       </div>
 
@@ -82,11 +93,19 @@ const TopHeader = ({ collapsed, setCollapsed, visible, setVisible }) => {
           <div className="font-medium">{user.name}</div>
           <div className="text-xs text-gray-500">{user.email}</div>
         </div>
-        <Dropdown overlay={menu} placement="bottomRight">
+        <Dropdown overlay={menu}  placement="bottomRight">
           <Avatar style={{ backgroundColor: "#1890ff" }} size="large">
             {user.name.charAt(0)}
           </Avatar>
         </Dropdown>
+        <Button
+          type="primary"
+          className="hidden lg:block"
+          onClick={handleLogout}
+          icon={<LogoutOutlined />}
+        >
+          Logout
+        </Button>
       </div>
     </div>
   );

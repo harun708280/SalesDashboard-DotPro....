@@ -15,9 +15,9 @@ const SidebarMenu = ({collapsed,setCollapsed,visible,setVisible}) => {
 
   const menuItems = [
     {
-      key: '/',
+      key: '/dashboard',
       icon: <DashboardOutlined />,
-      label: <Link to="/">Dashboard</Link>,
+      label: <Link to="/dashboard">Dashboard</Link>,
     },
     {
       key: '/faq',
